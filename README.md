@@ -1,9 +1,12 @@
-# jitsi-server
+# Jitsi as a Flatcar App.
 
-The Flatcar Jitsi server. Uses https://github.com/jitsi/docker-jitsi-meet.
+This repo contains automation for deploying a full-featured Jitsi server on demand, within seconds.
+
+The automation uses docker-compose files from https://github.com/jitsi/docker-jitsi-meet.
 
 # Features
-- A full-blown Jitsi server, stateless, deploy when you need it (and remove it afterwards)
+
+- A full-featured Jitsi server, stateless, deploy when you need it (and remove it afterwards)
 - Jibri integration for server-side recording and live streaming
 - LetsEncrypt integration for serving HTTPS from your Jitsi host
 - Very minimal configuration requirements:
