@@ -8,7 +8,7 @@ set -euo pipefail
 
 arch="x86-64"
 branding="true"
-version=""
+version="stable-9584-1"
 
 usage() {
     echo "Usage: $0 [--no-branding] [--arch <x86-64|arm64>] <version>"
@@ -17,7 +17,7 @@ usage() {
     echo "                        or 'latest' for latest development master branch."
     echo "                        See https://github.com/jitsi/docker-jitsi-meet/releases"
     echo "                        for available versions."
-    echo "                        This argument is required."
+    echo "                        Defaults to '${version}'"
     echo "          --arch <arch> Generate config for this architecture. Must be"
     echo "                        'x86-64' or 'arm64' if provided."
     echo "                        Defaults to 'x86-64'."
