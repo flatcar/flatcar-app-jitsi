@@ -94,9 +94,12 @@ cp "${INSTALLER_DIR}/env.example" \
    "${INSTALLER_DIR}/docker-compose.yml" \
    "${INSTALLER_DIR}/jibri.yml" \
    "${INSTALLER_DIR}/gen-passwords.sh" \
+   "${INSTALLER_DIR}/branding-docker-compose.yml.patch" \
    "${DEST_DIR}"/
 
 cd "${DEST_DIR}"
+
+git apply branding-docker-compose.yml.patch
 
 mv env.example .env
 ./gen-passwords.sh
