@@ -85,9 +85,15 @@ into a Flatcar deployment.
 
 The config generator requires a Jitsi version.
 At the time of writing, `stable-`10431` was the latest release.
+This version is the default.
 To use this version, run:
 ```bash
-./generate_config.sh stable-10431
+./generate_config.sh
+```
+
+To use a custom version, run:
+```bash
+./generate_config.sh <version>
 ```
 For a full list of Jitsi releases, check out
 https://github.com/jitsi/docker-jitsi-meet/releases.
