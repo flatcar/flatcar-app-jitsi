@@ -8,12 +8,12 @@ set -euo pipefail
 
 arch="x86-64"
 branding="true"
-version="stable-9584-1"
+version="stable-10431"
 
 usage() {
     echo "Usage: $0 [--no-branding] [--arch <x86-64|arm64>] <version>"
     echo "          <version>     Jitsi-docker release version to generate config for."
-    echo "                        Either a release version like 'stable-9584-1'"
+    echo "                        Either a release tag like '${version}'"
     echo "                        or 'latest' for latest development master branch."
     echo "                        See https://github.com/jitsi/docker-jitsi-meet/releases"
     echo "                        for available versions."
