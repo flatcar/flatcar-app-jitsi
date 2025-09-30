@@ -49,13 +49,6 @@ storage:
       contents:
         local: jitsi-install.env
 
-    - path: /opt/jitsi/installer/config.yaml
-      mode: 0644
-      user:
-        name: jitsi
-      contents:
-        local: config.yaml
-
     - path: /etc/systemd/system/jitsi.service
       mode: 0644
       user:
@@ -84,6 +77,13 @@ storage:
       contents:
         local: jitsi-config.env
 
+    - path: /opt/jitsi/installer/branding-docker-compose.yml.patch
+      mode: 0644
+      user:
+        name: jitsi
+      contents:
+        local: @BRANDING_PATCH_FILE@
+
     - path: /opt/jitsi/installer/flatcar_banner.png
       mode: 0644
       user:
@@ -96,43 +96,43 @@ storage:
       user:
         name: jitsi
       contents:
-        local: resources/flatcar_logo-vertical-stacked-black.svg
+        source: https://raw.githubusercontent.com/flatcar/jitsi-server/main/resources/flatcar_logo-vertical-stacked-black.svg
 
     - path: /opt/jitsi/installer/flatcar_logo-vertical-stacked.svg
       mode: 0644
       user:
         name: jitsi
       contents:
-        local: resources/flatcar_logo-vertical-stacked.svg
+        source: https://raw.githubusercontent.com/flatcar/jitsi-server/main/resources/flatcar_logo-vertical-stacked.svg
 
-    # These are downloaded by generate_config.sh for the jitsi release specified
+    # These are customised by generate_config.sh for the jitsi release specified
     - path: /opt/jitsi/installer/env.example
       mode: 0644
       user:
         name: jitsi
       contents:
-        local: env.example
+        source: @JITSI_BASE_URL@/env.example
 
     - path: /opt/jitsi/installer/docker-compose.yml
       mode: 0644
       user:
         name: jitsi
       contents:
-        local: docker-compose.yml
+        source: @JITSI_BASE_URL@/docker-compose.yml
 
     - path: /opt/jitsi/installer/jibri.yml
       mode: 0644
       user:
         name: jitsi
       contents:
-        local: jibri.yml
+        source: @JITSI_BASE_URL@/jibri.yml
 
     - path: /opt/jitsi/installer/gen-passwords.sh
       mode: 0755
       user:
         name: jitsi
       contents:
-        local: gen-passwords.sh
+        source: @JITSI_BASE_URL@/gen-passwords.sh
 
 
 passwd:

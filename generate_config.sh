@@ -24,6 +24,18 @@ usage() {
     echo "          --no-branding Don't use Flatcar branding."
     echo
 }
+# --
+
+function test_branding_patch() {
+  local url="$1"
+  local patch="$2"
+
+  echo "Verifying our branding patch applies..."
+  curl -fsSL "${url}/docker-compose.yml" --remote-name
+
+  patch -p1 --dry-run <"${patch}"
+}
+# --
 
 while [ $# -gt 0 ] ; do
     case "$1" in
@@ -50,32 +62,28 @@ fi
 
 # Get docker compose yaml, default env, and related config files from
 # jitsi-docker.
-base_url=""
 files_list=( "docker-compose.yml" "env.example" "gen-passwords.sh" "jibri.yml" )
 
+base_url=""
 if [ "$version" = "latest" ] ; then
     base_url="https://raw.githubusercontent.com/jitsi/docker-jitsi-meet/master"
 else
     base_url="https://raw.githubusercontent.com/jitsi/docker-jitsi-meet/${version}"
 fi
 
-echo "Fetching config files for '${version}'"
-echo "${version}" > JITSI_VERSION
-
-for file in "${files_list[@]}"; do
-    echo -n "  ${file}: "
-    curl -fsSL "${base_url}/${file}" --remote-name
-    echo "OK"
-done
-
+branding_patch="resources/branding-docker-compose.yml.patch"
 if [ "$branding" = "true" ] ; then
-	echo "Applying branding patch"
-	git apply "resources/branding-docker-compose.yml.patch"
+  test_branding_patch "${base_url}" "${branding_patch}"
+else
+  branding_patch="resources/empty-branding-docker-compose.yml.patch"
 fi
 
 echo "Generating Ignition config"
 
-sed "s/@ARCH@/${arch}/g" config.yaml.tmpl \
+sed -e "s,@ARCH@,${arch},g" \
+    -e "s,@BRANDING_PATCH_FILE@,${branding_patch},g" \
+    -e "s,@JITSI_BASE_URL@,${base_url},g" \
+    config.yaml.tmpl \
     > config.yaml
 
 cat config.yaml \

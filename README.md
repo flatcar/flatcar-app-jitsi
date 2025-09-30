@@ -162,9 +162,9 @@ See Customisation below on how to pass a custom user/password into the deploymen
 ## Test the set-up locally
 
 You can test locally in a qemu VM.
-Uncomment the local test settings at the bottom of [`jitsi-config.env`](jitsi-config.env),
-disable `DEPLOY_SET_PUBLIC_IP` in [jitsi-install.env](jitsi-install.env),
-and re-generate the configuration.
+1. Uncomment the local test settings at the bottom of [`jitsi-config.env`](jitsi-config.env), then
+2. disable `DEPLOY_SET_PUBLIC_IP` in [jitsi-install.env](jitsi-install.env), and
+3. re-generate the configuration by running `./generate_config.sh`
 
 Fetch the latest `flatcar_production_qemu_uefi_efi_code.fd`,
  `flatcar_production_qemu_uefi_efi_vars.fd`,
