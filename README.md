@@ -47,6 +47,13 @@ git clone https://github.com/flatcar/jitsi-server.git
 cd jitsi-server
 ```
 
+The deployment can be customised on 2 separate levels:
+* `jitsi-config.env` is used by the script that generates our deployment configuration.
+  It holds mandatory and optional settings (see below) for generating and tailoring the deployment.
+  Also, important runtime environment variables for the Jitsi containers are set here.
+* `jitsi-install.env` is used by the on-node Jitsi installer script [`jitsi-install.sh`](jitsi-install.sh)
+  and contains settings used only at installation time.
+
 Take a look at [`jitsi-config.env`](jitsi-config.env) and set
 - `JITSI_SERVER_FQDN` to your new server's designated DNS name.
   You will need to point the respective DNS record to your new Jitsi server later,
@@ -55,6 +62,17 @@ Take a look at [`jitsi-config.env`](jitsi-config.env) and set
   This is particularly important for long-running servers as LetsEncrypt will send
   TLS certificate expiries to that email address.
   To refresh a certificate simply restart the Jitsi service (or the whole node).
+
+You'll also find a number of pre-set variables for customising Jitsi features, e.g. authentication.
+
+You may (but are not required to) change installer settings, too.
+Check out [`jitsi-install.env`](jitsi-install.env) next:
+* If you've set `ENABLE_AUTH` in `jitsi-config.env`, you may want to set a moderator username here.
+* Optionally you can also set a moderator password.
+  A random password will be generated otherwise, and you need to retrieve it from the instance's
+  `/opt/jitsi/.env` file once it is provisioned.
+
+The file also contains DNS/IP related options important to the installation process.
 
 That's it, you're good to go!
 
@@ -66,10 +84,10 @@ for a specific Jitsi release, and generate a self-contained configuration to pas
 into a Flatcar deployment.
 
 The config generator requires a Jitsi version.
-At the time of writing, `stable-9584-1` was the latest release.
+At the time of writing, `stable-`10431` was the latest release.
 To use this version, run:
 ```bash
-./generate_config.sh stable-9584-1
+./generate_config.sh stable-10431
 ```
 For a full list of Jitsi releases, check out
 https://github.com/jitsi/docker-jitsi-meet/releases.
