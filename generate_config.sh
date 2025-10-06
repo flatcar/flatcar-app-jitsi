@@ -71,6 +71,8 @@ else
     base_url="https://raw.githubusercontent.com/jitsi/docker-jitsi-meet/${version}"
 fi
 
+echo "$version">JITSI_VERSION
+
 branding_patch="resources/branding-docker-compose.yml.patch"
 if [ "$branding" = "true" ] ; then
   test_branding_patch "${base_url}" "${branding_patch}"

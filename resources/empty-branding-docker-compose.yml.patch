@@ -1,4 +1,1 @@
 diff --git docker-compose.yml docker-compose.yml
-index 22261bb..ee6f1e5 100644
---- a/docker-compose.yml
-+++ b/docker-compose.yml

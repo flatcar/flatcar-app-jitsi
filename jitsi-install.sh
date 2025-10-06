@@ -99,7 +99,7 @@ cp "${INSTALLER_DIR}/env.example" \
 
 cd "${DEST_DIR}"
 
-git apply branding-docker-compose.yml.patch
+git apply branding-docker-compose.yml.patch --allow-empty
 
 mv env.example .env
 ./gen-passwords.sh
