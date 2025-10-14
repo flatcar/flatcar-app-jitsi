@@ -54,8 +54,8 @@ while [ $# -gt 0 ] ; do
                 fi
                 arch="$2"
                 shift;;
-        --ssh) if [[ -f "${2}" ]] ; then
-                 ssh+=( "$(cat ${2})" )
+        --ssh) if [[ -f ${2} ]] ; then
+                 ssh+=( "$(cat "${2}")" )
                else
                  ssh+=( "${2}" )
                fi
@@ -76,7 +76,7 @@ fi
 # If ssh keys were specified, build a yaml-parseable array from pubkeys
 #  ( "key1" "key2" "key3" ) => ["key1","key2","key3"]
 ssh_keys=""
-if [[ -n "${ssh[@]}" ]] ; then
+if [[ ${#ssh[@]} -gt 0 ]] ; then
   for k in "${ssh[@]}"; do
     ssh_keys="${ssh_keys},\"${k}\""
   done
