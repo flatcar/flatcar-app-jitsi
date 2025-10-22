@@ -185,37 +185,116 @@ chmod 755 flatcar_production_qemu_uefi.sh
 
 # Operate Jitsi
 
-Connect to https://meet.flatcar.org/, start a meeting.
-A login will pop up if you try to create a room and are not authenticated; log in with the user/pass from the installation above.
-After starting a meeting, you can (optionally) enable a lobby by clicking "..." -> "Security".
+The below runbook contains instructions for Flatcar maintainers for operating flatcar-app-jitsi on our infrastructure.
+While the workflow might be useful for other projects, most items are specific to the Flatcar project.
 
-## Stream a meeting to youtube
+## Pre-create the session
 
-You need to be logged in as a moderator in Jitsi in order to start a stream.
-1. Go to https://studio.youtube.com/, click "Create" (upper right), select "Go live" from the drop-down
-2. Configure the live stream, set a title, set visibility, etc.
-3. Copy the stream key. DO NOT CLOSE THE TAB.
-4. Go to https://meet.flatcar.org/ IN A SEPARATE TAB, create or join a room (https://meet.flatcar.org/OfficeHours is a favourite).
-5. Click "..." (lower center, to the right), select "Start live stream"
-6. Paste the stream key and click the "Start live stream" button.
-7. Optionally, add a youtube widget to the Matrix channel so people there can watch the stream
-   1. In Matrix, Click "room info" (upper right)
-      1. Select "Add widgets, bridges & bots"
-      2. Click "Add Integrations"
-      3. Select "Youtube"
-   2. In the Youtube live stream tab (you didn't close it, did you?)
-      1. Click the "share" button (the bent arrow on the upper right hand side) and copy the video URL to clipboard
-   3. In the Matrix youtube widget settings
-      1. Paste the video URL
-      2. Click Save and close the widget dialog
-      3. Back in the room info, pin the youtube widget
-      4. Finally, click "Set my room layout for everyone"
+In this section, we'll check the Agenda "discussion" and update the youtube live stream.
+We'll obtain:
+- the title and summary for the meeting
+- the live stream URL
 
-NOTE that when you are the moderator and you close the call / leave the room, the meeting will end for everybody, and a stream, if currently ongoing, will stop.
+- Open the upcoming meeting's agenda discussion.
+  There should be only one open "discussion" in the respective category.
+  **This step will provide title and meeting summary for later steps**.
+  * Office Hours: https://github.com/flatcar/Flatcar/discussions/categories/flatcar-office-hours
+  * Dev Sync: https://github.com/flatcar/Flatcar/discussions/categories/flatcar-developer-sync
+  * Other community events like the "Maintenance Mode" bug-smashing day: https://github.com/flatcar/Flatcar/discussions/categories/community-events
 
-Stop the stream:
+- Pre-create the youtube live stream / recording.
+  **This step will provide the youtube stream URL for later steps.**
+  - Go to https://www.youtube.com/
+  - Make sure you're the "Flatcar channel" user @FlatcarLinux (user avatar at the upper right)
+  - Click "+ Create" at the upper right, select "Go Live".
+    You will be directed to the Youtube Studio live streaming UI.
+  - Update the stream meta-information; most importantly, title and summary:
+    - Title follows the format `YYYY-MM-DD Flatcar <what>`, e.g. for the 2025 October Office Hours it's `2025-10-08 Flatcar Office Hours`.
+    - Summary can be copy+pasted from the Agenda "discussion" on GitHub.
+  - After updating meta-information, click "share" (a curved arrow on the right, at the very top).
+    - copy the video URL and *paste it into a new browser window*.
+    - After the window loaded (the stream will show as "live stream offline"), copy the URL from the address bar.
 
-8. In the Jitsi meeting, click "..." (lower center, to the right), select "Stop live stream"
-9. In the youtube live stream tab, click "End stream" (upper right)
-10. If you pinned the stream in the Matrix channel, you can remove the pinning by removing the youtube widget from the channel.
-    If you chose to not remove the pinned video, users on Matrix will have the opportunity to replay a recording of the meeting streamed.
+Best leave the Youtube streaming UI tab open. You'll need it later for the streaming key.
+
+## Announce the meeting
+
+We can now create announcement messages for Matrix and Slack, and update the Matrix channel's embedded youtube video.
+Announcements usually happen briefly (1h to 30min) before the meeting starts.
+
+- Open the Agenda "discussion" and edit the short summary at the top to add the youtube URL.
+  There should be a bullet point `-Youtube live stream / recording: TBD`, replace TBD with the actual youtube URL.
+
+- Go to the "Flatcar" Matrix channel at https://app.element.io/?#/room/#flatcar.
+  - Open the "Room info" via the small circular "(i)" button at the top right.
+  - Select "Extensions".
+  - Click "+ Add extension" at the top right.
+  - In the dialog window, under "Added to this room", there should be the youtube extension. Click it.
+  - In order to update the URL, we need to remove and re-add it.
+    Select "Delete" to remove the youtube extension.
+  - This will bring you back to the main "Add extension" dialog.
+    Select the youtube widget which has now moved to "Widgets".
+  - Put in the youtube URL. There's no need to add a title as the title will be fetched from youtube. Click "Add".
+  - Close the "Add extensions" dialog.
+  - Back in the "Extensions" menu, the youtube widget will be listed.
+    Select "pin" via the little "pin" icon right of the youtube widget.
+  - Then click "Set layout for everyone" (text below the list of extensions".
+
+- Still in the Matrix channel, write the announcement.
+  **Keep in mind to always press Shift+Return, never _just_ Return, as this will prematurely send the message.**
+  - On the first line, announce what meeting it is, when the meeting will start (time difference as well as absolute time).
+    You can use `@room` to ping everyone in the channel.
+  - Below that, copy+paste the intro paragraph from the Agenda, and the first 2 bullet points (Jitsi URL and youtube URL).
+    Add one bullet point with the Agenda URL
+  - You can use emoji and markdown formatting.
+    Leave empty lines between sections to improve readability.
+    Example announcement:
+    ```
+	@room  📢 **The Flatcar community office hours will commence in ~45min**, at 2:30pm UTC
+
+	In the office hours we discuss news and happenings in and around Flatcar, provide a space for our user community to discuss with maintainers, show demos, and do our release planning.
+
+	Join if you want to learn about the project and get in contact with other users and with maintainers.
+
+	- Agenda: https://github.com/flatcar/Flatcar/discussions/1900
+	- Jitsi: https://meet.flatcar.org/OfficeHours
+	- Youtube live stream / recording: https://www.youtube.com/live/43ITkUiRpU4
+    ```
+
+- Slack: we announce the meeting in both the "Kubernetes" and "CNCF" slack, in the respective `#flatcar` channel.
+  **Keep in mind to always press Shift+Return, never _just_ Return, as this will prematurely send the message.**
+  - You can copy+paste the _rendered_ (after sending) Matrix announcement (without `@room`); it will mostly keep its formatting (and emojis).
+  - Pinging whole channels is (sadly) disabled in both Slacks.
+
+
+## Start the meeting and stream it to youtube
+
+- Open the youtube streaming UI where we prepared the stream earlier.
+- Start the meeting on Jitsi
+  - go to https://meet.flatcar.org/OfficeHours and start the meeting.
+    You'll need the Jitsi credentials to log in as a moderator.
+  - If the meeting already started, you can authenticate via:
+    - press  the "..." button ("More action")
+	- select your user at the top of the the pull-up menu
+    - then select "Profile" (should already be selected
+    - click the "Log-in" button.
+- After everyone joined, start the streaming / recording.
+  - Select "..." ("More actions") which will open a pull-up menu
+  - Click "Start live stream"
+  - In the Youtube streaming UI, click "copy streaming key".
+    **Be careful not to disclose the streaming key. Consider it a password.**
+  - Paste the youtube streaming key to the Jitsi live stream dialog, and start the stream.
+
+## During the meeting
+
+Check the youtube studio streaming UI every now and then.
+People watching the live stream may use the chat for asking questions; the chat is visible on the youtube studio streaming UI.
+
+## After the meeting
+
+- To close the meeting, use "End meeting for all".
+  This will also stop the live stream.
+- End the stream in Youtube studio.
+- Check the Agenda: there are 2 TODO items at the very bottom:
+  - Create a new Agenda "discussion" for the next meeting.
+  - Close the Agenda discussion of the now completed meeting.
