@@ -191,16 +191,20 @@ While the workflow might be useful for other projects, most items are specific t
 ## Pre-create the session
 
 In this section, we'll check the Agenda "discussion" and update the youtube live stream.
-We'll obtain:
-- the title and summary for the meeting
-- the live stream URL
 
-- Open the upcoming meeting's agenda discussion.
-  There should be only one open "discussion" in the respective category.
+We'll obtain:
+
+- The title and summary for the meeting
+- The live stream URL
+
+Before starting the meeting, gather the necessary information:
+
+- Open the upcoming meeting's agenda discussion on GitHub.
+  There should be only one open "discussion" (the latest) in the respective category.
   **This step will provide title and meeting summary for later steps**.
-  * Office Hours: https://github.com/flatcar/Flatcar/discussions/categories/flatcar-office-hours
-  * Dev Sync: https://github.com/flatcar/Flatcar/discussions/categories/flatcar-developer-sync
-  * Other community events like the "Maintenance Mode" bug-smashing day: https://github.com/flatcar/Flatcar/discussions/categories/community-events
+  - Office Hours: <https://github.com/flatcar/Flatcar/discussions/categories/flatcar-office-hours>
+  - Dev Sync: <https://github.com/flatcar/Flatcar/discussions/categories/flatcar-developer-sync>
+  - Other community events like the "Maintenance Mode" bug-smashing day: <https://github.com/flatcar/Flatcar/discussions/categories/community-events>
 
 - Pre-create the youtube live stream / recording.
   **This step will provide the youtube stream URL for later steps.**
@@ -212,7 +216,7 @@ We'll obtain:
     - Title follows the format `YYYY-MM-DD Flatcar <what>`, e.g. for the 2025 October Office Hours it's `2025-10-08 Flatcar Office Hours`.
     - Summary can be copy+pasted from the Agenda "discussion" on GitHub.
   - After updating meta-information, click "share" (a curved arrow on the right, at the very top).
-    - copy the video URL and *paste it into a new browser window*.
+    - Copy the video URL and *paste it into a new browser window*.
     - After the window loaded (the stream will show as "live stream offline"), copy the URL from the address bar.
 
 Best leave the Youtube streaming UI tab open. You'll need it later for the streaming key.
@@ -248,7 +252,7 @@ Announcements usually happen briefly (1h to 30min) before the meeting starts.
     Add one bullet point with the Agenda URL
   - You can use emoji and markdown formatting.
     Leave empty lines between sections to improve readability.
-    Example announcement:
+    Example announcement (Please make sure to change the links to yours! And not use the ones in this example):
     ```
 	@room  📢 **The Flatcar community office hours will commence in ~45min**, at 2:30pm UTC
 
