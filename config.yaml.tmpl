@@ -9,13 +9,13 @@ systemd:
 storage:
   links:
     - path: /etc/extensions/docker-compose.raw
-      target: /opt/extensions/docker-compose-2.39.4-@ARCH@.raw
+      target: /opt/extensions/docker-compose-2.40.3-@ARCH@.raw
       overwrite: true
 
   files:
-    - path: /opt/extensions/docker-compose-2.39.4-@ARCH@.raw
+    - path: /opt/extensions/docker-compose-2.40.3-@ARCH@.raw
       contents:
-        source: https://extensions.flatcar.org/extensions/docker-compose-2.39.4-@ARCH@.raw
+        source: https://extensions.flatcar.org/extensions/docker-compose-2.40.3-@ARCH@.raw
 
     # Maintenance / reboot window for staged OS updates:
     # Every monday morning at 1AM UTC

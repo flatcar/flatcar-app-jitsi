@@ -84,7 +84,7 @@ for a specific Jitsi release, and generate a self-contained configuration to pas
 into a Flatcar deployment.
 
 The config generator requires a Jitsi version.
-At the time of writing, `stable-`10431` was the latest release.
+At the time of writing, `stable-`10590` was the latest release.
 This version is the default.
 To use this version, run:
 ```bash

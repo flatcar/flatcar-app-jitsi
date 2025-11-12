@@ -8,7 +8,7 @@ set -euo pipefail
 
 arch="x86-64"
 branding="true"
-version="stable-10431"
+version="stable-10590"
 
 ssh=()
 
