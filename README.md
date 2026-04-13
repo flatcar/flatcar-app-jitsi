@@ -6,7 +6,10 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/flatcar?style=social)](https://x.com/flatcar)
 [![Mastodon Follow](https://img.shields.io/badge/Mastodon-Follow-6364FF?logo=mastodon)](https://hachyderm.io/@flatcar)
 [![Bluesky](https://img.shields.io/badge/Bluesky-Follow-0285FF?logo=bluesky)](https://bsky.app/profile/flatcar.org)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/10926/badge)](https://www.bestpractices.dev/projects/10926)
 
+
+> **Note:** To file an issue for any Flatcar repository, please use the [central Flatcar issue tracker](https://github.com/flatcar/Flatcar/issues).
 </div>
 
 # Jitsi as a Flatcar App.
@@ -302,3 +305,13 @@ People watching the live stream may use the chat for asking questions; the chat 
 - Check the Agenda: there are 2 TODO items at the very bottom:
   - Create a new Agenda "discussion" for the next meeting.
   - Close the Agenda discussion of the now completed meeting.
+
+---
+
+## Community & Project Documentation
+
+- [Contributing Guidelines](CONTRIBUTING.md) — How to contribute, find issues, and submit pull requests
+- [Code of Conduct](CODE_OF_CONDUCT.md) — Standards for respectful and inclusive community participation
+- [Security Policy](SECURITY.md) — How to report vulnerabilities and security-related information
+- [Maintainers](MAINTAINERS.md) — Current project maintainers and their responsibilities
+- [Governance](GOVERNANCE.md) — Project governance model, decision-making process, and roles
